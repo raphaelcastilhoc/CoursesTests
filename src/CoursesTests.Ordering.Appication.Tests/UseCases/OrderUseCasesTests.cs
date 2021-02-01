@@ -4,6 +4,7 @@ using FizzWare.NBuilder;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CoursesTests.Ordering.Appication.Tests.UseCases
@@ -12,6 +13,8 @@ namespace CoursesTests.Ordering.Appication.Tests.UseCases
     public class OrderUseCasesTests
     {
         private Mock<IOrderRepository> _orderRepository;
+        private Mock<IHttpClientFactory> _httpClientFactory;
+
         private OrderUseCases _orderUseCases;
 
 
@@ -19,8 +22,10 @@ namespace CoursesTests.Ordering.Appication.Tests.UseCases
         public void Initialize()
         {
             _orderRepository = new Mock<IOrderRepository>();
+            _httpClientFactory = new Mock<IHttpClientFactory>();
 
-            _orderUseCases = new OrderUseCases(_orderRepository.Object);
+            _orderUseCases = new OrderUseCases(_orderRepository.Object,
+                _httpClientFactory.Object);
         }
 
         [TestMethod]

@@ -17,11 +17,13 @@ namespace CoursesTests.Ordering.Domain.Aggregates.OrderAggregate
             {
                 AddItem(item.productId, item.amount);
             }
+
+            OrderItems = _orderItems;
         }
 
         public int CustomerId { get; private set; }
             
-        public IReadOnlyCollection<OrderItem> OrderItems { get => _orderItems; private set { } }
+        public IReadOnlyCollection<OrderItem> OrderItems { get; private set; }
 
         public void AddItem(int productId, int amount)
         {

@@ -2,6 +2,8 @@
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CoursesTests.Ordering.Appication.UseCases
@@ -51,7 +53,10 @@ namespace CoursesTests.Ordering.Appication.UseCases
             var existingOrder = await _orderRepository.GetAsync(useCase.OrderId);
             if(existingOrder != null)
             {
-                await _httpClient.PostAsJsonAsync("checkouts", useCase);
+                using (var content = new StringContent(JsonSerializer.Serialize(useCase), Encoding.UTF8, "application/json"))
+                {
+                    await _httpClient.PostAsync("checkouts", content);
+                }
             }
         }
     }
