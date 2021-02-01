@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  mongo-express:
+    image: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: sa
+      ME_CONFIG_BASICAUTH_PASSWORD: Qazplm27
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: sa
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Qazplm27
+    links:
+      - mongo
+    networks:
+      - mongo-compose-network
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: sa
+      MONGO_INITDB_ROOT_PASSWORD: Qazplm27
+    ports:
+      - "27017:27017"
+    volumes:
+      - /C:/Docker/Volumes/MongoDB
+    networks:
+      - mongo-compose-network
+
+networks: 
+    mongo-compose-network:
+      driver: bridge

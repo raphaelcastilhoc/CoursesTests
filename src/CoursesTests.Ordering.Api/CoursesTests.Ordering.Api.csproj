@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoursesTests.ApiInfrastructure\CoursesTests.ApiInfrastructure.csproj" />
+    <ProjectReference Include="..\CoursesTests.Ordering.Appication\CoursesTests.Ordering.Appication.csproj" />
+    <ProjectReference Include="..\CoursesTests.Ordering.Domain\CoursesTests.Ordering.Domain.csproj" />
+    <ProjectReference Include="..\CoursesTests.Ordering.Infrastructure\CoursesTests.Ordering.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>
