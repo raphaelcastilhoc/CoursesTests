@@ -37,7 +37,7 @@ namespace CoursesTests.Ordering.Appication.UseCases
             {
                 Id = order.Id.ToString(),
                 CustomerId = order.CustomerId,
-                OrderItems = order.OrderItems.Select(item => 
+                OrderItems = order.Items.Select(item => 
                 new CreateOrderUseCaseResult.OrderItem
                 {
                     ProductId = item.ProductId,

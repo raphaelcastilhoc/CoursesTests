@@ -17,7 +17,7 @@ namespace CoursesTests.Ordering.Domain.Aggregates.OrderAggregate
 
         public void AddAmount(int amount)
         {
-            Amount = amount;
+            Amount += amount;
         }
     }
 }

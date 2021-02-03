@@ -6,28 +6,24 @@ namespace CoursesTests.Ordering.Domain.Aggregates.OrderAggregate
 {
     public class Order : Entity, IAggregateRoot
     {
-        private readonly List<OrderItem> _orderItems;
-
         public Order(int customerId, IEnumerable<(int productId, int amount)> orderItems)
         {
             CustomerId = customerId;
+            Items = new List<OrderItem>();
 
-            _orderItems = new List<OrderItem>();
-            foreach (var item in orderItems)
+            foreach (var orderItem in orderItems)
             {
-                AddItem(item.productId, item.amount);
+                AddItem(orderItem.productId, orderItem.amount);
             }
-
-            OrderItems = _orderItems;
         }
 
         public int CustomerId { get; private set; }
             
-        public IReadOnlyCollection<OrderItem> OrderItems { get; private set; }
+        public ICollection<OrderItem> Items { get; private set; }
 
         public void AddItem(int productId, int amount)
         {
-            var existingItem = OrderItems.Where(item => item.ProductId == productId).FirstOrDefault();
+            var existingItem = Items.Where(item => item.ProductId == productId).FirstOrDefault();
             if(existingItem != null)
             {
                 existingItem.AddAmount(amount);
@@ -35,7 +31,7 @@ namespace CoursesTests.Ordering.Domain.Aggregates.OrderAggregate
             else
             {
                 var item = new OrderItem(productId, amount);
-                _orderItems.Add(item);
+                Items.Add(item);
             }
         }
     }
