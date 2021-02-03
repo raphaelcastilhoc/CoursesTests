@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CoursesTests.Ordering.Appication.UseCases
+namespace CoursesTests.Ordering.Application.UseCases
 {
     public interface IOrderUseCases
     {

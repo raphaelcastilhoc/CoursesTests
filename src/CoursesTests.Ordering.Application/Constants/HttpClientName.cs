@@ -1,4 +1,4 @@
-﻿namespace CoursesTests.Ordering.Appication.Constants
+﻿namespace CoursesTests.Ordering.Application.Constants
 {
     public static class HttpClientName
     {

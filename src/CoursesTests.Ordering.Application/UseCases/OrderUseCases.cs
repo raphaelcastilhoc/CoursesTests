@@ -1,4 +1,4 @@
-﻿using CoursesTests.Ordering.Appication.Constants;
+﻿using CoursesTests.Ordering.Application.Constants;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using System.Linq;
 using System.Net.Http;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CoursesTests.Ordering.Appication.UseCases
+namespace CoursesTests.Ordering.Application.UseCases
 {
     public class OrderUseCases : IOrderUseCases
     {

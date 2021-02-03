@@ -1,4 +1,4 @@
-﻿using CoursesTests.Ordering.Appication.UseCases;
+﻿using CoursesTests.Ordering.Application.UseCases;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using FizzWare.NBuilder;
 using FluentAssertions;
@@ -7,7 +7,7 @@ using Moq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace CoursesTests.Ordering.Appication.Tests.UseCases
+namespace CoursesTests.Ordering.Application.Tests.UseCases
 {
     [TestClass]
     public class OrderUseCasesTests
@@ -49,7 +49,7 @@ namespace CoursesTests.Ordering.Appication.Tests.UseCases
             var result = await _orderUseCases.AddOrderAsync(orderInputDto);
 
             //Assert
-            result.Should().BeEquivalentTo(expectedResult);
+            result.Should().BeEquivalentTo(expectedResult, options => options.Excluding(order => order.Id));
             _orderRepository.Verify(x => x.AddAsync(It.IsAny<Order>()), Times.Once);
         }
     }

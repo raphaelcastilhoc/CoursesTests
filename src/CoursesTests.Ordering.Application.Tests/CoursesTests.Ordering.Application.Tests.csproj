@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoursesTests.Ordering.Appication\CoursesTests.Ordering.Appication.csproj" />
+    <ProjectReference Include="..\CoursesTests.Ordering.Application\CoursesTests.Ordering.Application.csproj" />
     <ProjectReference Include="..\CoursesTests.Ordering.Domain\CoursesTests.Ordering.Domain.csproj" />
   </ItemGroup>
 

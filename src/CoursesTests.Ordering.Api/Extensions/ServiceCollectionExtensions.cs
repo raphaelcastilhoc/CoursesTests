@@ -1,4 +1,4 @@
-﻿using CoursesTests.Ordering.Appication.UseCases;
+﻿using CoursesTests.Ordering.Application.UseCases;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using CoursesTests.Ordering.Infrastructure.Factories;
 using CoursesTests.Ordering.Infrastructure.Repositories;

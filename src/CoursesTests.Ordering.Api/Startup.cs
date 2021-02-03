@@ -1,6 +1,6 @@
 using CoursesTests.ApiInfrastructure.Extensions;
 using CoursesTests.Ordering.Api.Extensions;
-using CoursesTests.Ordering.Appication.Constants;
+using CoursesTests.Ordering.Application.Constants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

@@ -1,4 +1,4 @@
-﻿using CoursesTests.Ordering.Appication.UseCases;
+﻿using CoursesTests.Ordering.Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
