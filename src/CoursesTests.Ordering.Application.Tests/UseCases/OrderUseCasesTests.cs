@@ -1,4 +1,7 @@
-﻿using CoursesTests.Ordering.Application.UseCases;
+﻿using CoursesTests.ExternalAdapters.Http;
+using CoursesTests.Ordering.Application.Constants;
+using CoursesTests.Ordering.Application.Dtos;
+using CoursesTests.Ordering.Application.UseCases;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using FizzWare.NBuilder;
 using FluentAssertions;
@@ -14,7 +17,7 @@ namespace CoursesTests.Ordering.Application.Tests.UseCases
     public class OrderUseCasesTests
     {
         private Mock<IOrderRepository> _orderRepository;
-        private Mock<IHttpClientFactory> _httpClientFactory;
+        private Mock<IHttpClientAdapter> _httpClientAdapter;
 
         private OrderUseCases _orderUseCases;
 
@@ -23,10 +26,10 @@ namespace CoursesTests.Ordering.Application.Tests.UseCases
         public void Initialize()
         {
             _orderRepository = new Mock<IOrderRepository>();
-            _httpClientFactory = new Mock<IHttpClientFactory>();
+            _httpClientAdapter = new Mock<IHttpClientAdapter>();
 
             _orderUseCases = new OrderUseCases(_orderRepository.Object,
-                _httpClientFactory.Object);
+                _httpClientAdapter.Object);
         }
 
         [TestMethod]
@@ -81,6 +84,39 @@ namespace CoursesTests.Ordering.Application.Tests.UseCases
 
             //Assert
             _orderRepository.Verify(x => x.UpdateAsync(It.IsAny<Order>()), Times.Never);
+        }
+
+        [TestMethod]
+        public async Task CreateCheckoutAsync_ShouldRequestCheckoutCreation()
+        {
+            //Arrange
+            var createCheckoutUseCase = Builder<CreateCheckoutUseCase>.CreateNew().Build();
+
+            var order = new Order(1, new List<(int, int)>());
+            _orderRepository.Setup(x => x.GetAsync(createCheckoutUseCase.OrderId)).ReturnsAsync(order);
+
+            //Act
+            await _orderUseCases.CreateCheckoutAsync(createCheckoutUseCase);
+
+            //Assert
+            _httpClientAdapter.Verify(x => x.PostAsync(HttpClientConfig.ClientNames.Checkout,
+                HttpClientConfig.EndpointPrefixes.Checkout,
+                It.IsAny<CreateCheckoutDto>()), Times.Once);
+        }
+
+        [TestMethod]
+        public async Task CreateOrderItemAsync_ShouldNotRequestCheckoutCreationIfOrderNotExists()
+        {
+            //Arrange
+            var createCheckoutUseCase = Builder<CreateCheckoutUseCase>.CreateNew().Build();
+
+            //Act
+            await _orderUseCases.CreateCheckoutAsync(createCheckoutUseCase);
+
+            //Assert
+            _httpClientAdapter.Verify(x => x.PostAsync(HttpClientConfig.ClientNames.Checkout,
+                HttpClientConfig.EndpointPrefixes.Checkout,
+                It.IsAny<CreateCheckoutDto>()), Times.Never);
         }
     }
 }

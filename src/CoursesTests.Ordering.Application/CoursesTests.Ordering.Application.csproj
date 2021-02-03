@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CoursesTests.ExternalAdapters\CoursesTests.ExternalAdapters.csproj" />
     <ProjectReference Include="..\CoursesTests.Ordering.Domain\CoursesTests.Ordering.Domain.csproj" />
   </ItemGroup>
 

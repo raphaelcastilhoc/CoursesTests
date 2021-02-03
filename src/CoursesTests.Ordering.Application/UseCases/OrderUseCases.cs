@@ -1,4 +1,6 @@
-﻿using CoursesTests.Ordering.Application.Constants;
+﻿using CoursesTests.ExternalAdapters.Http;
+using CoursesTests.Ordering.Application.Constants;
+using CoursesTests.Ordering.Application.Dtos;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using System.Linq;
 using System.Net.Http;
@@ -11,13 +13,13 @@ namespace CoursesTests.Ordering.Application.UseCases
     public class OrderUseCases : IOrderUseCases
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientAdapter _clientAdapter;
 
         public OrderUseCases(IOrderRepository orderRepository,
-            IHttpClientFactory httpClientFactory)
+            IHttpClientAdapter clientAdapter)
         {
             _orderRepository = orderRepository;
-            _httpClient = httpClientFactory.CreateClient(HttpClientName.Checkout);
+            _clientAdapter = clientAdapter;
         }
 
         public async Task<CreateOrderUseCaseResult> CreateOrderAsync(CreateOrderUseCase useCase)
@@ -65,10 +67,11 @@ namespace CoursesTests.Ordering.Application.UseCases
             var existingOrder = await _orderRepository.GetAsync(useCase.OrderId);
             if (existingOrder != null)
             {
-                using (var content = new StringContent(JsonSerializer.Serialize(useCase), Encoding.UTF8, "application/json"))
-                {
-                    await _httpClient.PostAsync("checkouts", content);
-                }
+                var createCheckoutDto = new CreateCheckoutDto(useCase.OrderId);
+
+                await _clientAdapter.PostAsync(HttpClientConfig.ClientNames.Checkout,
+                    HttpClientConfig.EndpointPrefixes.Checkout,
+                    createCheckoutDto);
             }
         }
     }

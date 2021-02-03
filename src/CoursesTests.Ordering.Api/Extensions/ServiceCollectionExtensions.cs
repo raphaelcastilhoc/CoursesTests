@@ -1,4 +1,5 @@
-﻿using CoursesTests.Ordering.Application.UseCases;
+﻿using CoursesTests.ExternalAdapters.Http;
+using CoursesTests.Ordering.Application.UseCases;
 using CoursesTests.Ordering.Domain.Aggregates.OrderAggregate;
 using CoursesTests.Ordering.Infrastructure.Factories;
 using CoursesTests.Ordering.Infrastructure.Repositories;
@@ -13,6 +14,8 @@ namespace CoursesTests.Ordering.Api.Extensions
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IOrderRepository, OrderRepository>();
+
+            services.AddScoped<IHttpClientAdapter, HttpClientAdapter>();
 
             services.AddSingleton<IMongoDatabase>(x =>
             {

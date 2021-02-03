@@ -31,9 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Checkout", "Checkout", "{F0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoursesTests.Checkout.Api", "CoursesTests.Checkout.Api\CoursesTests.Checkout.Api.csproj", "{4A209CB0-DC2C-42A7-8920-4943DCB2800B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursesTests.Ordering.Domain.Tests", "CoursesTests.Ordering.Domain.Tests\CoursesTests.Ordering.Domain.Tests.csproj", "{43566F8B-737B-44C6-964B-0A2AFFFE7634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoursesTests.Ordering.Domain.Tests", "CoursesTests.Ordering.Domain.Tests\CoursesTests.Ordering.Domain.Tests.csproj", "{43566F8B-737B-44C6-964B-0A2AFFFE7634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursesTests.Ordering.Api.Tests", "CoursesTests.Ordering.Api.Tests\CoursesTests.Ordering.Api.Tests.csproj", "{5BC44FCE-40C7-4CFF-9C5A-7349C050B426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoursesTests.Ordering.Api.Tests", "CoursesTests.Ordering.Api.Tests\CoursesTests.Ordering.Api.Tests.csproj", "{5BC44FCE-40C7-4CFF-9C5A-7349C050B426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursesTests.ExternalAdapters", "CoursesTests.ExternalAdapters\CoursesTests.ExternalAdapters.csproj", "{2F2C0551-6464-4765-B4C6-55C7AA88CCB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{5BC44FCE-40C7-4CFF-9C5A-7349C050B426}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BC44FCE-40C7-4CFF-9C5A-7349C050B426}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BC44FCE-40C7-4CFF-9C5A-7349C050B426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F2C0551-6464-4765-B4C6-55C7AA88CCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F2C0551-6464-4765-B4C6-55C7AA88CCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F2C0551-6464-4765-B4C6-55C7AA88CCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F2C0551-6464-4765-B4C6-55C7AA88CCB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{4A209CB0-DC2C-42A7-8920-4943DCB2800B} = {F03C238D-52A6-48C7-838C-09972E5AEE3D}
 		{43566F8B-737B-44C6-964B-0A2AFFFE7634} = {6980170B-567A-4A88-8031-8B98223D9877}
 		{5BC44FCE-40C7-4CFF-9C5A-7349C050B426} = {6980170B-567A-4A88-8031-8B98223D9877}
+		{2F2C0551-6464-4765-B4C6-55C7AA88CCB7} = {9DBC4D62-7D4E-43D5-8FC1-751A623EDCC1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6FFE499-5370-496A-8649-A5741391D071}

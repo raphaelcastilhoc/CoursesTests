@@ -27,7 +27,7 @@ namespace CoursesTests.Ordering.Api
                 .AddInfrastructure(Configuration)
                 .AddUseCases()
                 .AddCustomSwagger("Ordering Api")
-                .AddCustomHttpClient(HttpClientName.Checkout, Configuration.GetValue<string>("ExternalCheckoutBaseUrl"));
+                .AddCustomHttpClient(HttpClientConfig.ClientNames.Checkout, Configuration.GetValue<string>("ExternalCheckoutBaseUrl"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
