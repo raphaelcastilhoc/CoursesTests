@@ -31,12 +31,27 @@ namespace CoursesTests.Ordering.Api.Tests.Controllers
             var useCase = Builder<CreateOrderUseCase>.CreateNew().Build();
             var addedOrder = Builder<CreateOrderUseCaseResult>.CreateNew().Build();
 
-            _orderUseCases.Setup(x => x.AddOrderAsync(useCase)).ReturnsAsync(addedOrder);
+            _orderUseCases.Setup(x => x.CreateOrderAsync(useCase)).ReturnsAsync(addedOrder);
 
             var expectedResult = new CreatedResult("orders/", addedOrder.Id);
 
             //Act
             var result = await _ordersController.Post(useCase);
+
+            //Assert
+            result.Should().BeEquivalentTo(expectedResult);
+        }
+
+        [TestMethod]
+        public async Task CreateOrderItem_ShouldCreateOrderItem()
+        {
+            //Arrange
+            var createOrderItemInput = Builder<CreateOrderItemInput>.CreateNew().Build();
+
+            var expectedResult = new OkResult();
+
+            //Act
+            var result = await _ordersController.CreateOrderItem(It.IsAny<string>(), createOrderItemInput);
 
             //Assert
             result.Should().BeEquivalentTo(expectedResult);

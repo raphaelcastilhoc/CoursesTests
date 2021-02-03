@@ -20,8 +20,24 @@ namespace CoursesTests.Ordering.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> Post([FromBody] CreateOrderUseCase useCase)
         {
-            var result = await _orderUseCases.AddOrderAsync(useCase);
+            var result = await _orderUseCases.CreateOrderAsync(useCase);
             return Created("orders/", result.Id);
+        }
+
+        [HttpPatch]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [Route("{id}/orderItem")]
+        public async Task<IActionResult> CreateOrderItem(string id, [FromBody] CreateOrderItemInput input)
+        {
+            var useCase = new CreateOrderItemUseCase
+            {
+                OrderId = id,
+                ProductId = input.ProductId,
+                Amount = input.Amount
+            };
+
+            await _orderUseCases.CreateOrderItemAsync(useCase);
+            return Ok();
         }
 
         [HttpPost]

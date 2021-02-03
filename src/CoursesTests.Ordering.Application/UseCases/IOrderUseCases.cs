@@ -4,7 +4,9 @@ namespace CoursesTests.Ordering.Application.UseCases
 {
     public interface IOrderUseCases
     {
-        Task<CreateOrderUseCaseResult> AddOrderAsync(CreateOrderUseCase useCases);
+        Task<CreateOrderUseCaseResult> CreateOrderAsync(CreateOrderUseCase useCases);
+
+        Task CreateOrderItemAsync(CreateOrderItemUseCase useCase);
 
         Task CreateCheckoutAsync(CreateCheckoutUseCase useCase);
     }

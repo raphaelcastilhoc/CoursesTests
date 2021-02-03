@@ -20,9 +20,9 @@ namespace CoursesTests.Ordering.Application.UseCases
             _httpClient = httpClientFactory.CreateClient(HttpClientName.Checkout);
         }
 
-        public async Task<CreateOrderUseCaseResult> AddOrderAsync(CreateOrderUseCase useCase)
+        public async Task<CreateOrderUseCaseResult> CreateOrderAsync(CreateOrderUseCase useCase)
         {
-            var order = new Order(useCase.CustomerId, 
+            var order = new Order(useCase.CustomerId,
                 useCase.OrderItems.Select(item => (item.ProductId, item.Amount)));
 
             await _orderRepository.AddAsync(order);
@@ -37,7 +37,7 @@ namespace CoursesTests.Ordering.Application.UseCases
             {
                 Id = order.Id.ToString(),
                 CustomerId = order.CustomerId,
-                OrderItems = order.Items.Select(item => 
+                OrderItems = order.Items.Select(item =>
                 new CreateOrderUseCaseResult.OrderItem
                 {
                     ProductId = item.ProductId,
@@ -48,10 +48,22 @@ namespace CoursesTests.Ordering.Application.UseCases
             return useCaseResult;
         }
 
+        public async Task CreateOrderItemAsync(CreateOrderItemUseCase useCase)
+        {
+            var order = await _orderRepository.GetAsync(useCase.OrderId);
+
+            if (order != null)
+            {
+                order.AddItem(useCase.ProductId, useCase.Amount);
+
+                await _orderRepository.UpdateAsync(order);
+            }
+        }
+
         public async Task CreateCheckoutAsync(CreateCheckoutUseCase useCase)
         {
             var existingOrder = await _orderRepository.GetAsync(useCase.OrderId);
-            if(existingOrder != null)
+            if (existingOrder != null)
             {
                 using (var content = new StringContent(JsonSerializer.Serialize(useCase), Encoding.UTF8, "application/json"))
                 {
