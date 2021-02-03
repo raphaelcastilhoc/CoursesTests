@@ -36,13 +36,12 @@ namespace CoursesTests.Ordering.Domain.Tests.Aggregates.OrderAggregate
         public void AddItem_ShouldIncrementAmountIfItemAlreadyExists()
         {
             //Arrange
-            var customerId = 1;
             var orderItems = new List<(int productId, int amount)>
             {
                 (1, 1)
             };
 
-            var order = new Order(customerId, orderItems);
+            var order = new Order(customerId: 1, orderItems);
 
             var expectedOrderItems = new List<OrderItem>
             {
