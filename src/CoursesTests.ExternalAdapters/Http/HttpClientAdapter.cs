@@ -20,7 +20,8 @@ namespace CoursesTests.ExternalAdapters.Http
 
             using (var content = new StringContent(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json"))
             {
-                await httpClient.PostAsync(endpointSufix, content);
+                var response = await httpClient.PostAsync(endpointSufix, content);
+                response.EnsureSuccessStatusCode();
             }
         }
     }
